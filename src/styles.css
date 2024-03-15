@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-dark-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+body {
+    font-size: 24px;
+    font-family: "Rubik", sans-serif;
+}
+
+@import "tailwindcss/base" layer(tailwindcss);
+
+@import "tailwindcss/components" layer(tailwindcss);
+
+@import "tailwindcss/utilities" layer(tailwindcss);
+
