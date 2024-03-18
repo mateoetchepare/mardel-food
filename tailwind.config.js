@@ -3,7 +3,10 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     colors: {
-      'blanco': '#f1f5f9',
+      'blanco': '#ffffff',
+      'homeText': '#F50794',
+      'homeDescript': '#343234',
+      'homeBackground': '#FCFAFC',
     },
     extend: {},
   },
