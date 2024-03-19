@@ -1,15 +1,42 @@
 <section class="w-full absolute inset-0 bg-homeBackground">
-    <div class="flex relative">
-        <img class="flex object-cover drop-shadow-md rounded-md brightness-75 min-h-52 sm:min-h-64 md:min-h-96" src="assets/home.jpg" alt="">   
-        <div class="absolute inset-0 flex flex-col items-center justify-center">
-            <span class="text-homeText font-medium tracking-wide text-base sm:text-2xl lg:text-3xl xl:text-5xl 
-            text-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.6)]">Explore exquisite cuisine, order from anywhere</span> 
-        </div>
+  <div class="flex relative">
+    <img
+      class="flex object-cover drop-shadow-md brightness-75 min-h-52 sm:min-h-64 md:min-h-96"
+      src="assets/home.jpg"
+      alt=""
+    />
+    <div class="absolute inset-0 flex flex-col items-center justify-center">
+      <span
+        class="text-homeText font-medium tracking-wide text-base sm:text-2xl lg:text-3xl xl:text-5xl text-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.6)]"
+        >Explore exquisite cuisine, order from anywhere</span
+      >
     </div>
-    <div class="flex items-center mx-48">
-        <span class="text-homeDescript text-base font-normal text-center mt-12">  Discover the perfect fusion of flavors at our restaurant 
-            in Mar del Plata. From authentic Mexican cuisine 
-            to classic Argentine dishes, we offer the best of both worlds in every bite. Come and let yourself be amazed by our delicious 
-            culinary proposal!</span>
-    </div>
+  </div>
+  <div class="flex items-center mx-12 sm:mx-36 md:mx-48">
+    <span
+      class="text-homeDescript text-base font-normal text-center mt-10"
+    >
+      Discover the perfect fusion of flavors at our restaurant in Mar del Plata.
+      From authentic Mexican cuisine to classic Argentine dishes, we offer the
+      best of both worlds in every bite. Come and let yourself be amazed by our
+      delicious culinary proposal!</span
+    >
+  </div>
+  <div class="flex flex-col max-w-full max-h-full items-center mt-10 bg-homeBackground">
+    <span
+      class="text-blackSuave text-2xl md:text-4xl text-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.25)] mb-10"
+      >FIND US</span
+    >
+    <iframe
+      class="w-5/6 mb-12"
+      width="1250"
+      height="450"
+      frameborder="0"
+      style="border: 0"
+      referrerpolicy="no-referrer-when-downgrade"
+      [src]="safeUrl"
+      allowfullscreen
+    >
+    </iframe>
+  </div>
 </section>

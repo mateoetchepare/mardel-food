@@ -2,13 +2,16 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    colors: {
-      'blanco': '#ffffff',
-      'homeText': '#F50794',
-      'homeDescript': '#343234',
-      'homeBackground': '#FCFAFC',
+    extend: {
+      colors: {
+        'blanco': '#ffffff',
+        'homeText': '#F50794',
+        'homeDescript': '#343234',
+        'homeBackground': '#FCFAFC',
+        'black': '#000000',
+        'blackSuave': '#1D1C1D',
+      },
     },
-    extend: {},
   },
   plugins: [],
 }
