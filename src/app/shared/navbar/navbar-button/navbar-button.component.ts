@@ -17,6 +17,7 @@ export class NavbarButtonComponent {
   }
 
   public routeChange() {
-    this.router.navigate([`/${this.content.toLowerCase()}`]);
+    this.router.navigate([`/${this.content.toLowerCase()}`])
+    console.log('HOLAAAAAAAAAA');
   }
 }
