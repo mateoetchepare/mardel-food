@@ -1,7 +1,8 @@
-import { NgModule, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderComponent } from './order.component';
 import { RouterModule, Routes } from '@angular/router';
+import { OrderComponent } from './order.component';
+import { OrderItemModule } from './order-item/order-item.module';
 
 const routes: Routes = [
   { path: '', component: OrderComponent } 
@@ -12,6 +13,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    OrderItemModule,
   ],
   exports: [
     OrderComponent,
