@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderItemComponent } from './order-item.component';
 
-
+import { MenuItemComponent } from './menu-item.component';
 
 @NgModule({
-  declarations: [OrderItemComponent],
+  declarations: [MenuItemComponent],
   imports: [
     CommonModule
   ],
   exports: [
-    OrderItemComponent,
+    MenuItemComponent,
   ]
 })
-export class OrderItemModule { }
+export class MenuItemModule { }

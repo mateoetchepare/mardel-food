@@ -1,24 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { OrderComponent } from './order.component';
-import { OrderItemModule } from './order-item/order-item.module';
+
+import { MenuComponent } from './menu.component';
+import { MenuItemModule } from './menu-item/menu-item.module';
 
 const routes: Routes = [
-  { path: '', component: OrderComponent } 
+  { path: '', component: MenuComponent } 
 ]
 
 @NgModule({
-  declarations: [OrderComponent],
+  declarations: [MenuComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    OrderItemModule,
+    MenuItemModule,
   ],
   exports: [
-    OrderComponent,
+    MenuComponent,
   ],
 })
-export class OrderModule  { 
+export class MenuModule  { 
   
 }
