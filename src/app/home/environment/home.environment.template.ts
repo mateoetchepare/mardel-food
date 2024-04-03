@@ -1,3 +1,4 @@
-export const keys  = {
+export const env  = {
     googleApiKey: 'yourString',
+    PORT: 'yourBackendPort',
 };

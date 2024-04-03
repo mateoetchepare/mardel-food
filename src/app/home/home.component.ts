@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { keys } from './environment/home.environment';
+import { env } from './environment/home.environment';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 @Component({
   selector: 'home',
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  public googleKey = keys.googleApiKey;
+  public googleKey = env.googleApiKey;
   public safeUrl: SafeUrl = ''
 
   ngOnInit(): void {
