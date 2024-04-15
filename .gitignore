@@ -42,4 +42,5 @@ testem.log
 Thumbs.db
 
 # API Key
-src/app/home/environment/home.environment.ts
+environment.ts
+mardel-food-fb3afc66f219.json

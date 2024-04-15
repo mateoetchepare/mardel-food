@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { env } from './environment/home.environment';
+import { env } from 'environment';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 @Component({
   selector: 'home',

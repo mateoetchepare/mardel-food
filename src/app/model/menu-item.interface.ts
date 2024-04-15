@@ -1,6 +1,6 @@
 
-enum foodType {
-    Burger, Tacos, Steak,
+export enum foodType {
+    bruger = 'burger', tacos = 'tacos', steak = 'steak',
 }
 
 export interface MenuItem {
@@ -9,5 +9,5 @@ export interface MenuItem {
     description: string,
     price: number,
     foodType: foodType,
-    iamge: string,
+    image: string,
 }
