@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'add-button',
   templateUrl: './add-button.component.html',
 })
-export class AddButtonComponent { }
+export class AddButtonComponent { 
+  @Input()
+  customClass: string = '';
+
+}

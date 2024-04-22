@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { MenuItem, foodType } from '../model/menu-item.interface';
 import { MenuService } from './menu.service';
+import { AddEditItemComponent } from './add-edit-item/add-edit-item.component';
+
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -11,8 +14,9 @@ import { MenuService } from './menu.service';
 export class MenuComponent implements OnInit {
   protected menuItems: MenuItem[] = [];
   protected foodTypes: foodType[] = Object.values(foodType);
+  protected showAddEditModal: boolean = false;
 
-  constructor(private service: MenuService) {
+  constructor(private service: MenuService, private dialog: MatDialog) {
     service.requestItems().subscribe(
       items => {
         this.menuItems = items
@@ -27,6 +31,13 @@ export class MenuComponent implements OnInit {
         this.menuItems = items;
       }
     );
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(AddEditItemComponent, {
+      height: '55%',
+      width: '50%',
+    });
   }
 
   ngOnInit(): void {

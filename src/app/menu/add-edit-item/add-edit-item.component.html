@@ -1,0 +1,75 @@
+<h1 mat-dialog-title>{{ toDo }}</h1>
+<form [formGroup]="menuItemForm" class="m-8" (ngSubmit)="onSubmit()">
+  <div mat-dialog-container color="primary">
+    <mat-form-field class="w-full mb-4">
+      <mat-label>Enter dish name</mat-label>
+      <input matInput formControlName="name" placeholder="Cheeseburger" [errorStateMatcher]="matcher"/>
+      <mat-error
+        *ngIf="
+          menuItemForm.get('name')!.hasError('required') &&
+          !menuItemForm.get('name')!.pristine
+        "
+      >
+        <span>This field is required</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full mb-4">
+      <mat-label>Enter description</mat-label>
+      <input
+        matInput
+        formControlName="description"
+        placeholder="Delicious burger with cheddar cheese & fries."
+        [errorStateMatcher]="matcher"
+      />
+    </mat-form-field>
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field floatLabel="always" class="w-full">
+        <mat-label>Enter price</mat-label>
+        <input
+          matInput
+          formControlName="price"
+          class="text-right"
+          placeholder="0"
+          [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="menuItemForm.get('price')?.hasError('required')">
+          <span *ngIf="menuItemForm.get('price')?.hasError('required')"
+            >Price is required</span
+          >
+        </mat-error>
+        <mat-error *ngIf="menuItemForm.get('price')?.hasError('pattern')">
+          <span *ngIf="menuItemForm.get('price')?.hasError('pattern')"
+            >Price must be a number</span
+          >
+        </mat-error>
+        <span matTextPrefix>$&nbsp;</span>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Food Type</mat-label>
+        <mat-select formControlName="foodType" [errorStateMatcher]="matcher">
+          <mat-option *ngFor="let foodType of foodTypes" [value]="foodType">
+            {{ foodType }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="menuItemForm.get('foodType')?.hasError('required') && !menuItemForm.get('foodType')?.pristine"
+          >Please choose a food type</mat-error
+        >
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="flex items-center justify-center mt-12 gap-4 text-center">
+    <button mat-raised-button color="primary" type="submit" class="text-center">
+      Submit
+      <mat-icon iconPositionEnd>
+        upload
+      </mat-icon>
+    </button>
+    <button mat-raised-button color="accent" (click)="fileInput.click()">Upload Image
+        <mat-icon iconPositionEnd>
+            download
+          </mat-icon>
+          <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+    </button>
+  </div>
+</form>
+

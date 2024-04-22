@@ -4,7 +4,7 @@ export enum foodType {
 }
 
 export interface MenuItem {
-    id: string, // uuid
+    id: string,
     name: string,
     description: string,
     price: number,

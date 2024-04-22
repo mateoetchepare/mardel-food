@@ -17,4 +17,10 @@
       <menu-item *ngFor="let menuItem of menuItems" [menuItem]="menuItem"></menu-item>
     </div>
   </div>
+
+  <add-button
+    customClass="fixed w-16 h-16 m-16"
+    (click)="openDialog()"
+  ></add-button>
+
 </section>

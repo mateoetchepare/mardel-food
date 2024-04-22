@@ -1,5 +1,7 @@
 <button
-  class="absolute bottom-0 right-0 mb-3 mr-3 bg-red-600 text-homeBackground w-10 h-10 font-medium rounded-full"
+  [ngClass]="[customClass]"
+  class="bottom-0 right-0 bg-red-600 text-homeBackground font-medium rounded-full hover:bg-red-700 transition-all
+  active:bg-red-800"
 >
   +
 </button>
