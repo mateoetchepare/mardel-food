@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ toDo }}</h1>
+<h1 mat-dialog-title>Menu Item</h1>
 <form [formGroup]="menuItemForm" class="m-8" (ngSubmit)="onSubmit()">
   <div mat-dialog-container color="primary">
     <mat-form-field class="w-full mb-4">
@@ -64,7 +64,7 @@
         upload
       </mat-icon>
     </button>
-    <button mat-raised-button color="accent" (click)="fileInput.click()">Upload Image
+    <button mat-raised-button color="accent" type="button" (click)="fileInput.click()">Upload Image
         <mat-icon iconPositionEnd>
             download
           </mat-icon>

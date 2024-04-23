@@ -9,10 +9,8 @@ import { Storage } from '@google-cloud/storage';
 export class MenuService {
 
   private url: String = '';
-  //private storage?: Storage;
 
   constructor(private httpClient: HttpClient) { 
-    //this.configStorage();
   } 
 
   requestItems(): Observable<MenuItem[]> {
@@ -22,13 +20,4 @@ export class MenuService {
   requestItemsByFoodType(foodType: foodType): Observable<MenuItem[]> {
     return this.httpClient.get<MenuItem[]>(`http://localhost:${env.PORT}/api/menu/${foodType.toString()}`)
   }
-/*
-  configStorage(): void {
-    const storageConfig = {keyFilename: 'mardel-food-fb3afc66f219.json'}
-    this.storage = new Storage(storageConfig);
-  }
-  async downloadImage(id: number)  {
-  
-  }
-  */
 }

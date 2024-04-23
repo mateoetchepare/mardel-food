@@ -1,20 +1,22 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { foodType } from 'src/app/model/menu-item.interface';
+import { MenuItem, foodType } from 'src/app/model/menu-item.interface';
 import { CustomErrorStateMatcher } from './custom-error-state-matcher/custom-error-state-matcher.component';
+import { AddEditItemService } from './add-edit-item.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'add-edit-item',
   templateUrl: `add-edit-item.component.html`,
 })
 export class AddEditItemComponent implements OnInit { 
-  @Input()
-  public toDo: string = '';
   public menuItemForm: FormGroup = {} as FormGroup;
   public foodTypes: foodType[] = Object.values(foodType);
   public matcher = new CustomErrorStateMatcher();
 
-  constructor(private formBuilder: FormBuilder, private cd: ChangeDetectorRef) {
+  constructor(private formBuilder: FormBuilder, private cd: ChangeDetectorRef, private addEditItemService: AddEditItemService,
+    private dialog: MatDialog
+  ) {
 
   }
 
@@ -29,7 +31,9 @@ export class AddEditItemComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const menuItemFormValue = this.menuItemForm.value;
+    this.addEditItemService.sendNewMenuItem(menuItemFormValue);
+    this.dialog.closeAll();
   }
 
   onFileInput(event: any) {
