@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
+import { DeleteItemComponent } from './delete-item/delete-item.component';
 
 const routes: Routes = [
   { path: '', component: MenuComponent } 
@@ -22,6 +23,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AddEditItemComponent,
+    DeleteItemComponent,
     MenuComponent
   ],
   imports: [

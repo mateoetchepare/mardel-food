@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { MenuItem, foodType } from '../model/menu-item.interface';
 import { Observable } from 'rxjs';
 import { env } from 'environment';
-import { Storage } from '@google-cloud/storage';
 
 @Injectable({providedIn: 'root'})
 export class MenuService {

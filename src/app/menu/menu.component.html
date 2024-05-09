@@ -2,25 +2,43 @@
   <div
     class="flex flex-row justify-center items-center bg-gray-100 mt-24 h-auto"
   >
-    <div class="flex flex-col justify-between items-center my-8 -mr-8 sm:mr-2 md:mr-4 lg:mr-8" 
-    *ngFor="let foodtype of foodTypes" (click)="selectItemsByFoodType(foodtype)">
+    <div
+      class="flex flex-col justify-between items-center my-8 -mr-8 sm:mr-2 md:mr-4 lg:mr-8"
+      (click)="selectAllItems()"
+    >
+      <img
+        src="assets/menu/filter/all.jpg"
+        alt=""
+        class="w-full h-28 rounded-full object-cover hover:cursor-pointer"
+      />
+      <span class="text-gray-600 mt-4 text-xl sm:text-2xl">All</span>
+    </div>
+    <div
+      class="flex flex-col justify-between items-center my-8 -mr-8 sm:mr-2 md:mr-4 lg:mr-8"
+      *ngFor="let foodtype of foodTypes"
+      (click)="selectItemsByFoodType(foodtype)"
+    >
       <img
         src="assets/menu/filter/{{ foodtype }}.jpg"
         alt=""
         class="w-full h-28 rounded-full object-cover hover:cursor-pointer"
       />
-      <span class="text-gray-600 mt-4 text-xl sm:text-2xl">{{ foodtype | titlecase }}</span>
+      <span class="text-gray-600 mt-4 text-xl sm:text-2xl">{{
+        foodtype | titlecase
+      }}</span>
     </div>
   </div>
   <div class="w-5/6 xl:w-4/6 mx-auto my-16">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <menu-item *ngFor="let menuItem of menuItems" [menuItem]="menuItem"></menu-item>
+      <menu-item
+        *ngFor="let menuItem of menuItems"
+        [menuItem]="menuItem"
+      ></menu-item>
     </div>
   </div>
 
   <add-button
-    customClass="fixed w-16 h-16 m-16"
+    customClass="fixed w-16 h-16 m-16 sm: m-8"
     (click)="openDialog()"
   ></add-button>
-
 </section>

@@ -24,6 +24,15 @@ export class MenuComponent implements OnInit {
     );
   }
 
+  selectAllItems() {
+    this.service.requestItems().subscribe(
+      items => {
+        this.menuItems = items
+      }
+    );
+  }
+  
+
   selectItemsByFoodType(foodType: foodType) {
     this.service.requestItemsByFoodType(foodType).subscribe(
       items => {
@@ -36,7 +45,7 @@ export class MenuComponent implements OnInit {
   openDialog() {
     let dialogRef = this.dialog.open(AddEditItemComponent, {
       height: '55%',
-      width: '50%',
+      width: '55%',
     });
   }
 

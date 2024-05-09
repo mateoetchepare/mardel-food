@@ -1,21 +1,21 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, foodType } from 'src/app/model/menu-item.interface';
 import { CustomErrorStateMatcher } from './custom-error-state-matcher/custom-error-state-matcher.component';
 import { AddEditItemService } from './add-edit-item.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'add-edit-item',
   templateUrl: `add-edit-item.component.html`,
 })
 export class AddEditItemComponent implements OnInit { 
-  public menuItemForm: FormGroup = {} as FormGroup;
+  public menuItemForm: FormGroup = {} as FormGroup; // unique way i found on how to initialize form
   public foodTypes: foodType[] = Object.values(foodType);
   public matcher = new CustomErrorStateMatcher();
 
   constructor(private formBuilder: FormBuilder, private cd: ChangeDetectorRef, private addEditItemService: AddEditItemService,
-    private dialog: MatDialog
+    private dialog: MatDialog, @Inject (MAT_DIALOG_DATA) private menuItem?: MenuItem
   ) {
 
   }
@@ -24,10 +24,24 @@ export class AddEditItemComponent implements OnInit {
       this.menuItemForm = this.formBuilder.group( {
         name: ['', Validators.required],
         description: [''],
-        price: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+        price: ['', [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$")]],
         foodType: ['', [Validators.required]],
         image: [null],
       });
+
+      if (this.menuItem) {
+        this.onSetValues(this.menuItem);
+      }
+  }
+
+  onSetValues(menuItem: MenuItem) {
+    this.menuItemForm.setValue({
+      name: menuItem.name,
+      description: menuItem.description,
+      price: menuItem.price,
+      foodType: menuItem.foodType,
+      image: menuItem.description,
+    })
   }
 
   onSubmit() {

@@ -1,4 +1,4 @@
-<div class="flex flex-row justify-between border-2 border-gray-200 rounded-lg">
+<div class="flex flex-row justify-between border-2 border-gray-200 rounded-lg max-h-36">
   <div class="flex flex-col justify-around m-3">
     <span class="text-gray-900 font-medium text-xl sm:text-2xl">{{this.menuItem.id}}. {{this.menuItem.name}}</span>
     <span class="text-gray-400 font-light text-lg sm:text-lg line-clamp-2">{{ this.menuItem.description }}</span>
@@ -6,9 +6,21 @@
       <span class="text-gray-900 font-normal">{{this.menuItem.price | currency}}</span>
     </div>
   </div>
-  <div class="relative min-w-40">
-    <img [src]="this.menuItem.image"  class="object-cover rounded-md w-40 h-full" />
-    <add-button (click)="addUnit()" *ngIf="quantity == 0" customClass="absolute w-10 h-10 m-3"></add-button>
+  <div class="relative min-w-36">
+    <img [src]="this.menuItem.image"  class="relative object-cover rounded-md w-36 h-full" />
+    <button class="absolute flex items-center top-0 left-0 ml-3 mt-2 rounded-full p-1 hover:bg-blue-500 active:bg-blue-700 transition-all"
+    (click)="openDialog()">
+      <mat-icon [ngStyle]="{'color':'white'}">
+        edit
+      </mat-icon>
+    </button>
+    <button class="absolute flex items-center top-0 right-0 mr-3 mt-2 rounded-full p-1 hover:bg-red-500 active:bg-red-700 transition-all
+    "(click)="openDeleteDialog()">
+      <mat-icon [ngStyle]="{'color':'white'}">
+        delete
+      </mat-icon>
+    </button>
+    <add-button (click)="addUnit()" *ngIf="quantity == 0" customClass="absolute w-8 h-8 m-3"></add-button>
     <ng-container *ngIf="quantity > 0" >
       <div class="absolute flex flex-row bottom-0 right-0 mb-1 mr-1 justify-between items-center opacity-90 border-gray-600 border-2 rounded-lg">
         <button

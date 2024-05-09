@@ -2,7 +2,7 @@
 <form [formGroup]="menuItemForm" class="m-8" (ngSubmit)="onSubmit()">
   <div mat-dialog-container color="primary">
     <mat-form-field class="w-full mb-4">
-      <mat-label>Enter dish name</mat-label>
+      <mat-label>Dish name</mat-label>
       <input matInput formControlName="name" placeholder="Cheeseburger" [errorStateMatcher]="matcher"/>
       <mat-error
         *ngIf="
@@ -14,7 +14,7 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="w-full mb-4">
-      <mat-label>Enter description</mat-label>
+      <mat-label>Description</mat-label>
       <input
         matInput
         formControlName="description"
@@ -24,7 +24,7 @@
     </mat-form-field>
     <div class="grid grid-cols-2 gap-4">
       <mat-form-field floatLabel="always" class="w-full">
-        <mat-label>Enter price</mat-label>
+        <mat-label>Price</mat-label>
         <input
           matInput
           formControlName="price"
@@ -45,7 +45,7 @@
         <span matTextPrefix>$&nbsp;</span>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Food Type</mat-label>
+        <mat-label class="text-[.7rem] sm:text-base text-wrap md:text-base">Food Type</mat-label>
         <mat-select formControlName="foodType" [errorStateMatcher]="matcher">
           <mat-option *ngFor="let foodType of foodTypes" [value]="foodType">
             {{ foodType }}
@@ -57,15 +57,18 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="flex items-center justify-center mt-12 gap-4 text-center">
-    <button mat-raised-button color="primary" type="submit" class="text-center">
-      Submit
-      <mat-icon iconPositionEnd>
+  <div class="flex items-center justify-center mt-8 gap-4 text-center">
+    <button mat-raised-button color="primary" type="submit" class="text-center items-center">
+      <mat-label class="text-xs md:text-base items-center">Submit</mat-label>
+      <mat-icon iconPositionEnd class="">
         upload
       </mat-icon>
     </button>
-    <button mat-raised-button color="accent" type="button" (click)="fileInput.click()">Upload Image
-        <mat-icon iconPositionEnd>
+    <button mat-raised-button color="accent" type="button" class="" (click)="fileInput.click()">
+        <mat-label class="text-xs md:text-base">
+          Upload Image
+        </mat-label>
+        <mat-icon iconPositionEnd class="">
             download
           </mat-icon>
           <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />

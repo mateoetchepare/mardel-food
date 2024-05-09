@@ -18,7 +18,7 @@ export class AddEditItemService {
   });
     this.httpClient.post(`http://localhost:${env.PORT}/api/menu-item/new`, JSON.stringify(newMenuItem), { headers: header })
     .subscribe(response => {
-      console.log(response);
+      console.log(response); // TODO
     });
   }
 
