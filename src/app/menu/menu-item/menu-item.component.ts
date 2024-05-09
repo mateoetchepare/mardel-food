@@ -23,6 +23,7 @@ export class MenuItemComponent {
       height: '55%',
       width: '55%',
       data: this.menuItem,
+      
     });
   }
 

@@ -40,13 +40,15 @@ export class AddEditItemComponent implements OnInit {
       description: menuItem.description,
       price: menuItem.price,
       foodType: menuItem.foodType,
-      image: menuItem.description,
+      image: menuItem.image,
     })
   }
 
   onSubmit() {
     const menuItemFormValue = this.menuItemForm.value;
-    this.addEditItemService.sendNewMenuItem(menuItemFormValue);
+    if (!this.menuItem?.id)
+      this.addEditItemService.sendNewMenuItem(menuItemFormValue);
+    this.addEditItemService.updateMenuItem(this.menuItem!, menuItemFormValue);
     this.dialog.closeAll();
   }
 
