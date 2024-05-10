@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MenuItem } from 'src/app/model/menu-item.interface';
 import { DeleteItemService } from './delete-item.service';
 
@@ -9,11 +9,15 @@ import { DeleteItemService } from './delete-item.service';
 })
 export class DeleteItemComponent { 
 
-  constructor(@Inject (MAT_DIALOG_DATA) private menuItem: MenuItem, private service: DeleteItemService) {
+  constructor(@Inject (MAT_DIALOG_DATA) protected menuItem: MenuItem, private service: DeleteItemService, 
+  private dialogRef: MatDialogRef<DeleteItemComponent>) {
 
   }
 
   onDelete() {
-    this.service.deleteItem(this.menuItem);
+    this.service.deleteItem(this.menuItem)
+    .subscribe((res) => {
+      this.dialogRef.close({data: res})
+    });
   }
 }

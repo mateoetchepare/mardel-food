@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { env } from 'environment';
+import { Observable } from 'rxjs';
 import { MenuItem } from 'src/app/model/menu-item.interface';
 
 @Injectable({
@@ -13,17 +14,14 @@ export class AddEditItemService {
 
   }
 
-  sendNewMenuItem(newMenuItem: MenuItem) {
+  sendNewMenuItem(newMenuItem: MenuItem): Observable<any> {
     const header = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    this.httpClient.post(`http://localhost:${env.PORT}/api/menu-item/new`, JSON.stringify(newMenuItem), { headers: header })
-      .subscribe(response => {
-        console.log(response); // TODO
-      });
+    return this.httpClient.post(`http://localhost:${env.PORT}/api/menu-item/new`, JSON.stringify(newMenuItem), { headers: header })
   }
 
-  updateMenuItem(oldMenuItem: MenuItem, menuItem: any) {
+  updateMenuItem(oldMenuItem: MenuItem, menuItem: any): Observable<any> { //menu item is form value
     const header = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -46,10 +44,6 @@ export class AddEditItemService {
       patchData.image = menuItem.image;
     }
 
-    patchData.id = oldMenuItem.id;
-
-    this.httpClient.patch<Partial<MenuItem>>(`http://localhost:${env.PORT}/api/menu-item/${oldMenuItem.id}`, patchData, { headers: header }).subscribe(updatedMenuItem => {
-      console.log('Patch request response:', updatedMenuItem); // i want to 
-    });
+    return this.httpClient.patch<Partial<MenuItem>>(`http://localhost:${env.PORT}/api/menu-item/${oldMenuItem.id}`, patchData, { headers: header });
   }
 }

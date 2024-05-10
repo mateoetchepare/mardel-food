@@ -36,7 +36,6 @@ export class MenuComponent implements OnInit {
   selectItemsByFoodType(foodType: foodType) {
     this.service.requestItemsByFoodType(foodType).subscribe(
       items => {
-        console.log(items);
         this.menuItems = items;
       }
     );
