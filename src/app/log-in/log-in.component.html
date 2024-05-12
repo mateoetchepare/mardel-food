@@ -1,0 +1,26 @@
+<section class="relative w-full h-full bg-homeBackground">
+    <img src="assets/log-in/log-in.jpg" class="flex object-cover drop-shadow-md brightness-75 w-full h-full">
+    <div class="absolute w-3/4 md:w-2/3 lg:w-1/2 h-2/3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg
+        drop-shadow-2xl bg-homeBackground">
+        <div class="w-full absolute top-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-16">
+            <span class=" text-gray-700 text-5xl tracking-wider 
+            drop-shadow-lg w-full text-center">
+                Log In
+            </span>
+            <form class="relative w-full flex flex-col justify-center items-center gap-6">
+                <mat-form-field class="w-2/3">
+                    <mat-label>Enter your email</mat-label>
+                    <input  matInput placeholder="email@example.com" required>
+                </mat-form-field>
+                <mat-form-field class="w-2/3">
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput placeholder="myPassword" required>
+                </mat-form-field>
+                <button mat-raised-button color="accent" class="w-1/4">Log in</button>
+            </form>
+            <span class="drop-shadow-lg text-lg tracking-wide" >Don't have an account? 
+                <span class="text-rose-700 hover:cursor-pointer" (click)="toggleLogIn()" >Sign in now!</span>
+            </span>
+        </div>
+    </div>
+</section>
