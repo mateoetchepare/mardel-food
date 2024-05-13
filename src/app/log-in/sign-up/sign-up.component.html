@@ -1,0 +1,44 @@
+<div class="w-full absolute top-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-16">
+    <span class="text-gray-700 text-5xl tracking-wider drop-shadow-lg w-full text-center">
+        Sign Up
+    </span>
+    <form [formGroup]="signUpForm" class="relative w-full flex flex-col justify-center items-center gap-4"
+        (ngSubmit)="onSubmit()">
+        <mat-form-field class="w-2/3">
+            <mat-label>Enter your email</mat-label>
+            <input formControlName="email" matInput placeholder="email@example.com" required />
+            <mat-error *ngIf="signUpForm.get('email')?.hasError('required')">
+                <span>Email is required</span>
+            </mat-error>
+            <mat-error *ngIf="signUpForm.get('email')?.hasError('pattern')">
+                <span>Email must be valid</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-2/3">
+            <mat-label>Enter your password</mat-label>
+            <input matInput formControlName="password" placeholder="myPassword" required />
+            <mat-error *ngIf="signUpForm.get('password')?.hasError('required')">
+                <span>Password is required</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-2/3">
+            <mat-label>Confirm your password</mat-label>
+
+            <input matInput formControlName="confirmedPassword" placeholder="myPassword" required/>
+            <mat-error *ngIf="signUpForm.get('confirmedPassword')?.hasError('required')"  >
+                <span>Password is required</span>
+            </mat-error>
+            <mat-error *ngIf="
+            signUpForm.get('confirmedPassword')?.hasError('passwordsDontMatch')
+            ">
+                <span>Passwords are not equal</span>
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="accent" class="w-1/4" [disabled]="isFormInvalid()">
+            Sign Up
+        </button>
+    </form>
+    <span class="drop-shadow-lg text-lg tracking-wide -mt-4">Already have an account?
+        <span class="text-rose-700 hover:cursor-pointer" (click)="emitLogIn()">Log In!</span>
+    </span>
+</div>
