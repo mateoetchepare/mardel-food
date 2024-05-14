@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { SignUpService } from './sign-up.service';
-import { User } from 'src/app/model/User.interface';
+import { User } from 'src/app/model/user.interface';
 
 @Component({
   selector: 'sign-up',

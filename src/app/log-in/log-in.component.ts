@@ -28,7 +28,7 @@ export class LogInComponent implements OnInit {
 
   onSubmit() {
     const logInFormValue = this.logInForm.value;
-    this.service.submitCredentials(logInFormValue);
+    this.service.submitCredentials(logInFormValue)
   }
 
   isFormValid(): boolean {
