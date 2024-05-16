@@ -25,8 +25,9 @@
                         <span>Password is required</span>
                     </mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="accent" class="w-1/4" type="submit" [disabled]="isFormValid()" >
-                    Log in
+                <button mat-raised-button color="accent" class="w-1/4" type="submit" [disabled]="!isFormValid() || buttonPressed" >
+                    <span *ngIf="!this.buttonPressed">Log In</span>
+                    <mat-progress-spinner *ngIf="this.buttonPressed" [diameter]="20" mode="indeterminate"></mat-progress-spinner>
                 </button>
             </form>
             <span class="drop-shadow-lg text-lg tracking-wide">Don't have an account?

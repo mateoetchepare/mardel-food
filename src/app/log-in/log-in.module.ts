@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignUpModule } from './sign-up/sign-up.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LogInService } from './log-in.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 const routes: Routes = [
   { path: '', component: LogInComponent } 
@@ -22,6 +23,7 @@ const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     SignUpModule,

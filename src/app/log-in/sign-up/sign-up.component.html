@@ -34,8 +34,9 @@
                 <span>Passwords are not equal</span>
             </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="accent" class="w-1/4" [disabled]="isFormInvalid()">
-            Sign Up
+        <button mat-raised-button color="accent" class="w-1/4" [disabled]="!isFormValid() || buttonPressed" type="submit">
+            <span *ngIf="!this.buttonPressed">Sign Up</span>
+            <mat-progress-spinner *ngIf="this.buttonPressed" [diameter]="20" mode="indeterminate"></mat-progress-spinner>
         </button>
     </form>
     <span class="drop-shadow-lg text-lg tracking-wide -mt-4">Already have an account?

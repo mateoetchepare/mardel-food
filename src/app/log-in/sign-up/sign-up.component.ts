@@ -1,20 +1,22 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpService } from './sign-up.service';
-import { User } from 'src/app/model/user.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'sign-up',
   templateUrl: `sign-up.component.html`,
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
 
   public signUpForm: FormGroup = {} as FormGroup;
   @Output()
   public toggleLogIn = new EventEmitter<string>();
+  public buttonPressed: boolean = false;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(public fb: FormBuilder, private service: SignUpService) {
-    
+
   }
 
   ngOnInit(): void {
@@ -32,25 +34,37 @@ export class SignUpComponent implements OnInit {
       } else {
       }
     });
+
+    this.subscriptions.add(
+      this.service.buttonPressed$.subscribe(pressed => {
+        this.buttonPressed = pressed;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   emitLogIn() {
     this.toggleLogIn.emit('');
   }
 
-  isFormInvalid(): boolean {
-    return this.signUpForm.get('email')!.hasError('required') || this.signUpForm.get('email')!.hasError('pattern') || 
-    this.signUpForm.get('password')!.hasError('required') || this.signUpForm.get('confirmedPassword')!.hasError('required') || 
-    this.signUpForm.get('confirmedPassword')!.hasError('passwordsDontMatch');
+  isFormValid(): boolean {
+    return !(this.signUpForm.get('email')!.hasError('required') || this.signUpForm.get('email')!.hasError('pattern') ||
+      this.signUpForm.get('password')!.hasError('required') || this.signUpForm.get('confirmedPassword')!.hasError('required') ||
+      this.signUpForm.get('confirmedPassword')!.hasError('passwordsDontMatch'));
   }
 
   onSubmit() {
     const formValue = this.signUpForm.value;
     delete formValue.confirmedPassword;
-    this.service.signUp(formValue).subscribe((user) => {
-      console.log(user); //TODO
-    })
+    this.service.signUp(formValue, (succesful) => {
+      if (succesful) {
+        this.emitLogIn();
+      } else {
+        //TODO mostrar error
+      }
+    });
   }
-
-
 }

@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SignUpComponent } from './sign-up.component';
 import { SignUpService } from './sign-up.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 
 
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
   ],
   exports: [
