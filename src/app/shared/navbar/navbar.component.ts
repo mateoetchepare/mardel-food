@@ -4,4 +4,10 @@ import { Component } from '@angular/core';
   selector: 'shared-navbar',
   templateUrl: `./navbar.component.html`,
 })
-export class NavbarComponent { }
+export class NavbarComponent { 
+  public menuTouched: boolean = false;
+
+  toggleMenuTouched() {
+    this.menuTouched = !this.menuTouched;
+  }
+}
