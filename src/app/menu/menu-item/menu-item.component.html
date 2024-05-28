@@ -8,13 +8,13 @@
   </div>
   <div class="relative min-w-36">
     <img [src]="this.menuItem.image"  class="relative object-cover rounded-md w-36 h-full" />
-    <button class="absolute flex items-center top-0 left-0 ml-3 mt-2 rounded-full p-1 hover:bg-blue-500 active:bg-blue-700 transition-all"
+    <button *ngIf="isAdmin" class="absolute flex items-center top-0 left-0 ml-3 mt-2 rounded-full p-1 hover:bg-blue-500 active:bg-blue-700 transition-all"
     (click)="openAddEditDialog()">
       <mat-icon [ngStyle]="{'color':'white'}">
         edit
       </mat-icon>
     </button>
-    <button class="absolute flex items-center top-0 right-0 mr-3 mt-2 rounded-full p-1 hover:bg-red-500 active:bg-red-700 transition-all
+    <button *ngIf="isAdmin" class="absolute flex items-center top-0 right-0 mr-3 mt-2 rounded-full p-1 hover:bg-red-500 active:bg-red-700 transition-all
     "(click)="openDeleteDialog()">
       <mat-icon [ngStyle]="{'color':'white'}">
         delete
@@ -28,7 +28,7 @@
           class="text-homeBackground w-9 h-9 font-light rounded-l-lg hover:bg-gray-600 active:bg-gray-800 transition-all">
           -
         </button>
-        <span class="flex min-w-8 min-h-4 font-medium text-sm rounded-t-md rounded-b-md justify-center">{{ this.quantity }}</span>
+        <span class="flex text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.6)] min-w-8 min-h-4 font-medium text-sm rounded-t-md rounded-b-md justify-center">{{ this.quantity }}</span>
         <button
           (click)="addUnit()"
           class="bg-opacity-90 text-homeBackground w-9 h-9 font-light text-md rounded-r-lg items-center hover:bg-gray-600 active:bg-gray-800 transition-all">

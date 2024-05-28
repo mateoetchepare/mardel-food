@@ -18,6 +18,8 @@ export class DeleteItemComponent {
     this.service.deleteItem(this.menuItem)
     .subscribe((res) => {
       this.dialogRef.close({data: res})
-    });
+    }), (error: any) => {
+      console.log(error); // TODO mostrar mejor el error y hacer lo mismo con add edit
+    }
   }
 }

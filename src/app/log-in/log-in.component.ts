@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LogInService } from './log-in.service';
-import { Subscription, config } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -31,11 +31,7 @@ export class LogInComponent implements OnInit, OnDestroy {
       })
     );
     this.snackBarSubscription = this.service.snackBarEvent$.subscribe(event => {
-      if (event === 'success') {
-        this.showSnackBar('You have logged in succesfully', 'Dismiss');
-      } else {
-        this.showSnackBar(JSON.parse(event), 'Dismiss'); // i think it looks actually cleaner with a callback like i do with signUp component
-      }
+        this.showSnackBar(event, 'Dismiss'); // i think it looks actually cleaner with a callback like i do with signUp component
     });
   }
 
@@ -59,7 +55,7 @@ export class LogInComponent implements OnInit, OnDestroy {
   }
 
   showSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action)
+    this._snackBar.open(message, action, { duration: 3500 })
   }
 
 }

@@ -29,12 +29,14 @@
         (changes)="selectAllItems()"
         *ngFor="let menuItem of menuItems"
         [menuItem]="menuItem"
+        [isAdmin]="isAdmin"
       ></menu-item>
     </div>
   </div>
 </div>
 
   <add-button
+    *ngIf="isAdmin"
     customClass="fixed w-16 h-16 m-16 sm: m-8"
     (click)="openDialog()"
   ></add-button>

@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './menu.component.html',
 })
 export class MenuComponent implements OnInit {
+  protected isAdmin: boolean = false;
   protected menuItems: MenuItem[] = [];
   protected foodTypes: foodType[] = Object.values(foodType);
   protected showAddEditModal: boolean = false;
@@ -22,6 +23,14 @@ export class MenuComponent implements OnInit {
         this.menuItems = items
       }
     );
+  }
+
+  ngOnInit(): void {
+      this.checkIfAdmin();
+  }
+
+  checkIfAdmin() {
+    this.isAdmin = this.service.isAdmin()
   }
 
   selectAllItems() {
@@ -48,7 +57,4 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-
-  }
  }

@@ -8,6 +8,7 @@
             <shared-navbar-button [content]="'HOME'"> </shared-navbar-button>
             <shared-navbar-button [content]="'MENU'"> </shared-navbar-button>
             <shared-navbar-button [content]="logInService.isAuthenticated ? 'LOG OUT' : 'LOG IN'"> </shared-navbar-button>
+            <mat-icon svgIcon="cart" class="mt-2 hover:cursor-pointer hover:opacity-80 duration-300" matBadge="2" matBadgeColor="accent"></mat-icon>
             <button mat-icon-button>
                 <mat-icon class="mt-[.375rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] visible md:invisible md:z-10"
                     [ngStyle]="{'color': 'white'}" (click)="toggleMenuTouched()">

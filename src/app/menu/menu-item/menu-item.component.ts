@@ -4,16 +4,25 @@ import { Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEditItemComponent } from '../add-edit-item/add-edit-item.component';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'menu-item',
   templateUrl: './menu-item.component.html',
 })
 export class MenuItemComponent { 
+
+  /*
+  protected amountItemsCartSubject = new BehaviorSubject<MenuItem>({});
+  protected amountItemsCart$ = this.amountItemsCartSubject.asObservable();
+  */
   public quantity: number = 0;
 
   @Input({required: true}) 
   public menuItem: MenuItem = {} as MenuItem;
+  @Input({required: true})
+  public isAdmin: boolean = false;
+
   @Output()
   public changes = new EventEmitter<string>();
 

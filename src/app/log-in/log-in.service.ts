@@ -16,12 +16,15 @@ export class LogInService implements OnInit {
   snackBarEvent$ = this.snackBarEvent.asObservable();
 
   private authenticated: boolean = false;
+  private admin: boolean = false;
 
   constructor(private httpClient: HttpClient, private router: Router) {
     this.getAuthenticationStatus();
+    this.checkIfAdmin();
    }
 
    ngOnInit(): void {
+    
    }
 
   getAuthenticationStatus() {
@@ -33,16 +36,22 @@ export class LogInService implements OnInit {
     }
   }
 
+  checkIfAdmin(): void {
+    this.httpClient.get('http://localhost:3000/api/auth/status', { withCredentials: true })
+    .subscribe((res: any) => {
+      this.admin = res.isAdmin
+    }), (error: any) => {
+      console.log(error);
+    }
+  }
+
   get isAuthenticated() {
     return this.authenticated;
   }
 
-/*
-  saveCookie(cookie: any) {
-    localStorage.setItem("sessionId", JSON.stringify(cookie));
+  get isAdmin() {
+    return this.admin;
   }
-  */
-
 
   submitCredentials(credentials: User): void {
     this.setButtonPressed(true);
@@ -50,27 +59,25 @@ export class LogInService implements OnInit {
     .subscribe((res: any) => {
       if (res && res.cookie && res.passport) {
         this.authenticated = true;
+        this.checkIfAdmin();
         this.setButtonPressed(false);
-        this.snackBarEvent.next('success');
-        window.location.reload();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']).then(() => {
+          window.location.reload();
+        });
       }
     }, (error) => {
-      console.log(error);
-      console.log(`parseado es ${JSON.parse(error)}`)
         this.setButtonPressed(false);
-        this.snackBarEvent.next(error);
+        console.log(error);
+        console.log(error.error);
+        this.snackBarEvent.next(error.error.message);
     });
-    this.router.navigate(['/home']);
   }
 
   logout() {
     this.httpClient.post(`http://localhost:3000/api/auth/logout`, {}, { withCredentials: true })
     .subscribe((res: any) => {
         this.authenticated = false
-        console.log('entra por res')
     }, (error) => {
-      console.log('entra por error')
         this.snackBarEvent.next(error);
     });
   }
