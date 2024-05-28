@@ -1,8 +1,8 @@
-<div class="w-full absolute top-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-16">
+<div class="w-full absolute top-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 md:gap-8 lg:gap-10">
     <span class="text-gray-700 text-5xl tracking-wider drop-shadow-lg w-full text-center">
         Sign Up
     </span>
-    <form [formGroup]="signUpForm" class="relative w-full flex flex-col justify-center items-center gap-4"
+    <form [formGroup]="signUpForm" class="relative w-full flex flex-col justify-center items-center gap-2"
         (ngSubmit)="onSubmit()">
         <mat-form-field class="w-2/3">
             <mat-label>Enter your email</mat-label>
@@ -34,12 +34,12 @@
                 <span>Passwords are not equal</span>
             </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="accent" class="w-1/4" [disabled]="!isFormValid() || buttonPressed" type="submit">
+        <button mat-raised-button color="accent" class="mt-4 w-1/4" [disabled]="!isFormValid() || buttonPressed" type="submit">
             <span *ngIf="!this.buttonPressed">Sign Up</span>
             <mat-progress-spinner *ngIf="this.buttonPressed" [diameter]="20" mode="indeterminate"></mat-progress-spinner>
         </button>
     </form>
-    <span class="drop-shadow-lg text-lg tracking-wide -mt-4">Already have an account?
+    <span class="drop-shadow-lg text-lg tracking-wide">Already have an account?
         <span class="text-rose-700 hover:cursor-pointer" (click)="emitLogIn()">Log In!</span>
     </span>
 </div>

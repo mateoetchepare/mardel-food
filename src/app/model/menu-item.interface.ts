@@ -1,6 +1,6 @@
 
 export enum foodType {
-    bruger = 'burger', tacos = 'tacos', steak = 'steak',
+    bruger = 'burger', tacos = 'tacos', steak = 'steak', all = 'all'
 }
 
 export interface MenuItem {

@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpService } from './sign-up.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'sign-up',
@@ -14,8 +15,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public toggleLogIn = new EventEmitter<string>();
   public buttonPressed: boolean = false;
   private subscriptions: Subscription = new Subscription();
+  private snackBarSubscription: Subscription = new Subscription();
 
-  constructor(public fb: FormBuilder, private service: SignUpService) {
+  constructor(public fb: FormBuilder, private service: SignUpService, private _snackBar: MatSnackBar) {
 
   }
 
@@ -59,12 +61,21 @@ export class SignUpComponent implements OnInit, OnDestroy {
   onSubmit() {
     const formValue = this.signUpForm.value;
     delete formValue.confirmedPassword;
-    this.service.signUp(formValue, (succesful) => {
-      if (succesful) {
+    this.service.signUp(formValue, (res) => {
+      console.log(res);
+      if (!res.error) {
         this.emitLogIn();
+        this.showSnackBar(res, 'Dismiss')
       } else {
-        //TODO mostrar error
+        this.showSnackBar(res.error.errorMessage, 'Dismiss') // acá debería poder hacer con typescript para q errorMessage sea accesible
       }
     });
   }
+
+  showSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
+
 }

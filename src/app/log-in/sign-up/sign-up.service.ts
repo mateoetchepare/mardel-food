@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from 'src/app/model/user.interface';
 
 @Injectable({
@@ -9,12 +9,14 @@ import { User } from 'src/app/model/user.interface';
 export class SignUpService {
 
   private buttonPressedSubject = new BehaviorSubject<boolean>(false);
+  private snackBarEvent = new Subject<string>();
   buttonPressed$ = this.buttonPressedSubject.asObservable();
+  snackBarEvent$ = this.snackBarEvent.asObservable();
 
   constructor(private httpClient: HttpClient) {
   }
 
-  signUp(user: User, callback: (succesful: boolean) => void): void {
+  signUp(user: User, callback: (callback: any) => void): void {
     this.setButtonPressed(true)
     const header = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -23,13 +25,11 @@ export class SignUpService {
     .subscribe((res: any) => {
       if (res) {
         this.setButtonPressed(false);
-        callback(true);
+        callback('Sign up completed succesfully!');
       }
     }, (error) => {
-      if (error.status === 401) {
         this.setButtonPressed(false);
-        callback(false);
-      }
+        callback(error);
     });
   }
 

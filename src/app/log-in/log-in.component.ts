@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { LogInService } from './log-in.service';
-import { Subscription } from 'rxjs';
+import { Subscription, config } from 'rxjs';
+
 
 @Component({
   selector: 'log-in',
@@ -11,9 +13,10 @@ export class LogInComponent implements OnInit, OnDestroy {
   public logIn: boolean = true;
   public logInForm: FormGroup = {} as FormGroup;
   public buttonPressed: boolean = false;
-  private subscriptions: Subscription = new Subscription();
+  private subscriptions: Subscription = new Subscription(); // using subject and behaviourSubject to test the differente between
+  private snackBarSubscription: Subscription = new Subscription();
 
-  constructor(public fb: FormBuilder, private service: LogInService) {
+  constructor(public fb: FormBuilder, private service: LogInService, private _snackBar: MatSnackBar) {
     
   }
 
@@ -27,10 +30,18 @@ export class LogInComponent implements OnInit, OnDestroy {
         this.buttonPressed = pressed;
       })
     );
+    this.snackBarSubscription = this.service.snackBarEvent$.subscribe(event => {
+      if (event === 'success') {
+        this.showSnackBar('You have logged in succesfully', 'Dismiss');
+      } else {
+        this.showSnackBar(JSON.parse(event), 'Dismiss'); // i think it looks actually cleaner with a callback like i do with signUp component
+      }
+    });
   }
 
   ngOnDestroy(): void {
       this.subscriptions.unsubscribe();
+      this.snackBarSubscription.unsubscribe(); 
   }
 
   toggleLogIn() {
@@ -45,6 +56,10 @@ export class LogInComponent implements OnInit, OnDestroy {
   isFormValid(): boolean {
     return !(this.logInForm.get('email')!.hasError('required') || this.logInForm.get('email')!.hasError('pattern') ||
     this.logInForm.get('password')!.hasError('required'))
+  }
+
+  showSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action)
   }
 
 }

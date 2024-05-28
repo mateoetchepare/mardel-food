@@ -9,7 +9,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class HomeComponent implements OnInit { 
 
   constructor(private sanitizer: DomSanitizer) {
-    
   }
 
   public googleKey = env.googleApiKey;

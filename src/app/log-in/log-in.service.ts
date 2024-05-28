@@ -1,43 +1,77 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { User } from '../model/user.interface';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LogInService {
+export class LogInService implements OnInit {
 
-  public isAuthenticated: boolean = false;
   private buttonPressedSubject = new BehaviorSubject<boolean>(false);
+  private snackBarEvent = new Subject<string>();
+
   buttonPressed$ = this.buttonPressedSubject.asObservable();
+  snackBarEvent$ = this.snackBarEvent.asObservable();
 
-  constructor(private httpClient: HttpClient) {
+  private authenticated: boolean = false;
 
+  constructor(private httpClient: HttpClient, private router: Router) {
+    this.getAuthenticationStatus();
    }
 
-   
+   ngOnInit(): void {
+   }
 
-  saveCookie(cookie: any) {
-    localStorage.setItem("userCredentials", JSON.stringify(cookie));
+  getAuthenticationStatus() {
+    this.httpClient.get('http://localhost:3000/api/auth/status', { withCredentials: true })
+    .subscribe((res) => {
+      this.authenticated = true;
+    }), (error: any) => {
+      this.authenticated = false;
+    }
   }
+
+  get isAuthenticated() {
+    return this.authenticated;
+  }
+
+/*
+  saveCookie(cookie: any) {
+    localStorage.setItem("sessionId", JSON.stringify(cookie));
+  }
+  */
+
 
   submitCredentials(credentials: User): void {
     this.setButtonPressed(true);
-    const header = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    this.httpClient.post(`http://localhost:3000/api/auth/login`, credentials, { headers: header })
+    this.httpClient.post(`http://localhost:3000/api/auth/login`, credentials, { withCredentials: true })
     .subscribe((res: any) => {
       if (res && res.cookie && res.passport) {
-        this.isAuthenticated = true;
-        this.saveCookie(res);
+        this.authenticated = true;
         this.setButtonPressed(false);
+        this.snackBarEvent.next('success');
+        window.location.reload();
+        this.router.navigate(['/home']);
       }
     }, (error) => {
-      if (error.status === 401) {
+      console.log(error);
+      console.log(`parseado es ${JSON.parse(error)}`)
         this.setButtonPressed(false);
-      }
+        this.snackBarEvent.next(error);
+    });
+    this.router.navigate(['/home']);
+  }
+
+  logout() {
+    this.httpClient.post(`http://localhost:3000/api/auth/logout`, {}, { withCredentials: true })
+    .subscribe((res: any) => {
+        this.authenticated = false
+        console.log('entra por res')
+    }, (error) => {
+      console.log('entra por error')
+        this.snackBarEvent.next(error);
     });
   }
 

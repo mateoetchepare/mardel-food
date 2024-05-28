@@ -1,5 +1,5 @@
-<nav class="w-full h-60 z-10 fixed">
-    <div class="flex items-center justify-between mx-12 p-2 min-h-60">
+<nav class="w-full z-10 fixed">
+    <div class="flex items-center justify-between mx-12 p-2">
         <div class="flex w-2/5">
             <span class="flex p-2 text-blanco drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mr-8 hover:text-opacity-80 duration-300 font-semibold
             text-base sm:text-lg md:text-xl">mardel Food</span>
@@ -7,27 +7,20 @@
         <div class="flex w-auto gap-6">
             <shared-navbar-button [content]="'HOME'"> </shared-navbar-button>
             <shared-navbar-button [content]="'MENU'"> </shared-navbar-button>
-            <shared-navbar-button [content]="'LOG IN'"> </shared-navbar-button>
+            <shared-navbar-button [content]="logInService.isAuthenticated ? 'LOG OUT' : 'LOG IN'"> </shared-navbar-button>
             <button mat-icon-button>
                 <mat-icon class="mt-[.375rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] visible md:invisible md:z-10"
                     [ngStyle]="{'color': 'white'}" (click)="toggleMenuTouched()">
                     menu
                 </mat-icon>
             </button>
-            <mat-sidenav-container *ngIf="menuTouched">
-                <mat-sidenav  opened class="h-20">
+            <mat-sidenav-container *ngIf="menuTouched" autosize>
+                <mat-sidenav opened="true" mode="side">
                     <mat-nav-list>
-                        <a mat-list-item>Aaaaa</a>
-                        <a mat-list-item>Aaaaa</a>
-                        <a mat-list-item>Aaaaa</a>
-                        <a mat-list-item>Aaaaa</a>
-                        <a mat-list-item>Aaaaa</a>
-                        <a mat-list-item>Aaaaa</a>
-                        
                     </mat-nav-list>
                 </mat-sidenav>
                 <mat-sidenav-content>
-                    <div class="w-12 h-">
+                    <div class="w-12">
                         <span>???</span>
                     </div>
                 </mat-sidenav-content>
