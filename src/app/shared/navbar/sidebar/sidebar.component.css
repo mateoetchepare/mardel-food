@@ -1,0 +1,37 @@
+/*
+.sidebar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    backdrop-filter: blur(5px); 
+    background-color: rgba(255, 255, 255, 0.3); 
+    z-index: 0;
+    transition: all .5s ease;
+}
+
+.sidebar h1 {
+    color: white;
+    text-align: center;
+    line-height: 70px;
+}
+
+.btn {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: block;
+    height: 100%;
+    width: 100%;
+    font-size: 1.25rem;
+    color: white;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid black;
+    transition: .4s;
+}
+
+
+/*

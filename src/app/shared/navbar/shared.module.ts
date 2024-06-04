@@ -9,12 +9,13 @@ import { NavbarButtonComponent } from './navbar-button/navbar-button.component';
 import { AddButtonComponent } from '../add-button/add-button.component';
 import { MatListModule } from '@angular/material/list'
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarButtonModule } from './navbar-button/navbar-button.module';
+import { SidebarModule } from './sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
     AddButtonComponent,
-    NavbarComponent, 
-    NavbarButtonComponent],
+    NavbarComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -22,11 +23,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    NavbarButtonModule,
+    SidebarModule,
   ],
   exports: [
     NavbarComponent,
     AddButtonComponent,
   ],
-  providers: [NavbarButtonComponent] //TODO esto esta feo
 })
 export class SharedModule { }

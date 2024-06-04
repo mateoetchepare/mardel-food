@@ -7,9 +7,11 @@ import { MenuService } from 'src/app/menu/menu.service';
 @Component({
   selector: 'shared-navbar',
   templateUrl: `./navbar.component.html`,
+  styleUrls: ['navbar.component.css']
 })
 export class NavbarComponent { 
 
+  public menuTouched: boolean = false;
 
   constructor(protected logInService: LogInService, 
     private matIconRegistry: MatIconRegistry, private DomSanitizer: DomSanitizer,
@@ -17,9 +19,6 @@ export class NavbarComponent {
     
       this.matIconRegistry.addSvgIcon('cart', this.DomSanitizer.bypassSecurityTrustResourceUrl('/assets/shopping_cart.svg'))
   }
-
-
-  public menuTouched: boolean = false;
 
   toggleMenuTouched() {
     this.menuTouched = !this.menuTouched;

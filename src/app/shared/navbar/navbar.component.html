@@ -1,31 +1,22 @@
 <nav class="w-full z-10 fixed">
-    <div class="flex items-center justify-between mx-12 p-2">
+    <div class="flex justify-between mx-12 p-2">
         <div class="flex w-2/5">
             <span class="flex p-2 text-blanco drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] mr-8 hover:text-opacity-80 duration-300 font-semibold
             text-base sm:text-lg md:text-xl">mardel Food</span>
         </div>
         <div class="flex w-auto gap-6">
-            <shared-navbar-button [content]="'HOME'"> </shared-navbar-button>
-            <shared-navbar-button [content]="'MENU'"> </shared-navbar-button>
-            <shared-navbar-button [content]="logInService.isAuthenticated ? 'LOG OUT' : 'LOG IN'"> </shared-navbar-button>
-            <mat-icon svgIcon="cart" class="mt-2 hover:cursor-pointer hover:opacity-80 duration-300" matBadge="2" matBadgeColor="accent"></mat-icon>
+            <shared-navbar-button [content]="'HOME'" class="hidden md:inline-flex"> </shared-navbar-button>
+            <shared-navbar-button [content]="'MENU'" class="hidden md:inline-flex"> </shared-navbar-button>
+            <shared-navbar-button [content]="logInService.isAuthenticated ? 'LOG OUT' : 'LOG IN'" class="hidden md:inline-flex"> </shared-navbar-button>
+            <mat-icon svgIcon="cart" class="mt-2 hover:cursor-pointer hover:opacity-80 duration-300" matBadge="2" 
+            matBadgeColor="accent" *ngIf="!menuTouched"></mat-icon>
             <button mat-icon-button>
-                <mat-icon class="mt-[.375rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] visible md:invisible md:z-10"
-                    [ngStyle]="{'color': 'white'}" (click)="toggleMenuTouched()">
+                <mat-icon class="mt-[.375rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] visible md:invisible md:z-10 hover:opacity-80 duration-300"
+                    [ngStyle]="{'color': 'white'}" (click)="toggleMenuTouched()" *ngIf="!menuTouched">
                     menu
                 </mat-icon>
             </button>
-            <mat-sidenav-container *ngIf="menuTouched" autosize>
-                <mat-sidenav opened="true" mode="side">
-                    <mat-nav-list>
-                    </mat-nav-list>
-                </mat-sidenav>
-                <mat-sidenav-content>
-                    <div class="w-12">
-                        <span>???</span>
-                    </div>
-                </mat-sidenav-content>
-            </mat-sidenav-container>
+            <shared-sidebar *ngIf="menuTouched" (closeSidebar)="toggleMenuTouched()" class="fade"></shared-sidebar>
         </div>
     </div>
 </nav>
